@@ -106,6 +106,8 @@ function step3Activate() {
     $("#seek").attr("min", 0);
     $("#seek").attr("max", MEDIA_SESSION.media.duration);
 
+    setVolume();
+
     $("#step_3").show();
 }
 

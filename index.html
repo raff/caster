@@ -35,6 +35,7 @@
     <div id="step_2" class="step">
         <input type="radio" name="url_radio" value="generic_url" checked />
         <select id="media_select">
+        <!--
             <option value="http://192.168.1.23/videos/Sherlock/Sherlock.3x02-encoding_two.webm">
                 Sherlock 03x02 - The Sign of Three (720p)
             </option>
@@ -44,6 +45,7 @@
             <option value="http://192.168.1.23/videos/Star_Trek_Into_Darkness[2013].webm">
                 Star Trek Into Darkness (2013) [1080p]
             </option>
+            -->
             <option value="http://commondatastorage.googleapis.com/gtv-videos-bucket/big_buck_bunny_1080p.mp4">
                 Big Buck Bunny
             </option>
@@ -75,37 +77,30 @@
     </h1>
     <div id="step_3" class="step">
         <button id="playpause" class="media_control" data-status="playing" onclick="playMedia()">
-            <img src="images/pause.png" width="24px" height="24px" />
+            <img src="images/pause.png" width="24px" height="24px" alt="Play/Pause"/>
+        </button>
+        <button id="stop" class="media_control" onclick="stopMedia()">
+            <img src="images/stop.png" width="24px" height="24px" alt="Stop"/>
         </button>
 
         <!-- seek controls -->
         <button id="rewind" class="media_control" onclick="rewind(10)">
-            <img src="images/rewind.png" width="24px" height="24px" />
+            <img src="images/rewind.png" width="24px" height="24px" alt="Rewind"/>
         </button>
         <input id="seek" type="range" class="media_control" onchange="updateSeek()" onclick="seekVideo()" />
         <button id="forward" class="media_control" onclick="forward(10);">
-            <img src="images/forward.png" width="24px" height="24px" />
+            <img src="images/forward.png" width="24px" height="24px" alt="Forward"/>
         </button>
         <span id="timeleft"></span>
         <!-- /seek controls -->
 
         <br /><br />
+        Mute <input id="mute" type="checkbox" onclick="setMute()"/>
+        Volume <input id="volume" type="range" class="media_control" min="0" max="100" value="10"
+            onchange="setVolume()" onclick="setVolume()" />
 
-        <button id="stop" class="media_control" onclick="stopMedia()">
-            <img src="images/stop.png" width="24px" height="24px" />
-        </button>
-        Stop to select another video
     </div>
     <!-- /STEP THREE -->
-
-    <br /><br />
-    <br /><br />
-    <div id="todo">
-        <h5>ToDo List:</h5>
-        <ol>
-            <li>Add volume controls</li>
-        </ol>
-    </div>
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
@@ -115,7 +110,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             INTERVAL_ID = window.setInterval(updateSeekPosition, 1000);
-            tryToLoadCast();
+            tryToLoadCast(launchApp);
         });
     </script>
 </body>

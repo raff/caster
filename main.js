@@ -5,6 +5,8 @@ var SESSION = null;
  * initialization success callback
  */
 function onInitSuccess() {
+    launchApp();
+
     if (!SESSION)
         step1Activate();
 }

@@ -99,6 +99,27 @@ function forward(sec) {
     );
 }
 
+function setVolume() {
+  var level = $("#volume").val() / 100.0;
+  setMediaVolume(level, null);
+}
+
+function setMute() {
+  var mute = $("#mute").is(':checked');
+  setMediaVolume(null, mute);
+}
+
+function setMediaVolume(level, mute) {
+  var request = new chrome.cast.media.VolumeRequest();
+  request.volume = new chrome.cast.Volume(level, mute);
+
+  MEDIA_SESSION.setVolume(
+     request,
+     function() {},
+     function() {}
+  );
+}
+
 /**
  * callback for media status event
  */
@@ -220,9 +241,8 @@ function stopMedia() {
         return false;
     }
 
-    var result = window.confirm("Are you sure you wish to stop this video?");
-
-    if (!result) return false;
+    //var result = window.confirm("Are you sure you wish to stop this video?");
+    //if (!result) return false;
 
     MEDIA_SESSION.stop(
         null,
